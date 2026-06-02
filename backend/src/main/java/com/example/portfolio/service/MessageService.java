@@ -2,35 +2,41 @@ package com.example.portfolio.service;
 
 import com.example.portfolio.model.Message;
 import com.example.portfolio.repository.MessageRepository;
-import com.example.portfolio.dto.MessageRequest;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 @Service
+@RequiredArgsConstructor
 public class MessageService {
 
     private final MessageRepository repository;
-    private final EmailService emailService;
 
-    public MessageService(
-            MessageRepository repository,
-            EmailService emailService
-    ) {
-        this.repository = repository;
-        this.emailService = emailService;
+    public Message save(Message message) {
+        message.setCreatedAt(LocalDateTime.now());
+        return repository.save(message);
     }
 
-    public Message save(MessageRequest request) {
+    public void delete(Long id) {
+        repository.deleteById(id);
+    }
 
-        Message message = new Message();
+    public Message markAsRead(Long id) {
 
-        message.setName(request.name());
-        message.setEmail(request.email());
-        message.setMessage(request.message());
+        Message message = repository.findById(id)
+                .orElseThrow();
 
-        Message saved = repository.save(message);
+        message.setRead(true);
 
-        emailService.sendMessageEmail(saved);
+        return repository.save(message);
+    }
 
-        return saved;
+    public List<Message> getAll() {
+        return repository.findAll(
+                Sort.by(Sort.Direction.DESC, "createdAt")
+        );
     }
 }

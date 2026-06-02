@@ -1,4 +1,4 @@
-function Navbar() {
+function Navbar({ onAdminClick }) {
   return (
     <nav
       className="
@@ -90,11 +90,23 @@ function Navbar() {
               Contact
             </a>
           </li>
+          
+          <li>
+            <button
+              onClick={onAdminClick}
+              className="text-white py-2 px-4 rounded-lg transition border border-cyan-500 cursor-pointer hover:bg-cyan-500 hover:text-white">
+              Admin
+            </button>
+          </li>
         </ul>
 
-       
+
       </div>
+
+      
     </nav>
+
+
   );
 }
 

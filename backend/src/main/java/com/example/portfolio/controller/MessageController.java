@@ -1,30 +1,39 @@
 package com.example.portfolio.controller;
 
 import com.example.portfolio.model.Message;
-import com.example.portfolio.dto.MessageRequest;
 import com.example.portfolio.service.MessageService;
-import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/messages")
-@CrossOrigin(origins="http://localhost:5173")
-
+@RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:5173")
 public class MessageController {
 
-    @Autowired
-    private MessageService service;
+    private final MessageService service;
 
     @PostMapping
-    public ResponseEntity<Message> create(@Valid @RequestBody MessageRequest request){
-        Message savedMessage = service.save(request);
-
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(savedMessage);
+    public Message save(@RequestBody Message message) {
+        return service.save(message);
     }
 
+    @GetMapping
+    public List<Message> getAll() {
+        return service.getAll();
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        service.delete(id);
+    }
+
+    @PutMapping("/{id}/read")
+    public Message markAsRead(
+            @PathVariable Long id
+    ) {
+        return service.markAsRead(id);
+    }
 }
