@@ -35,6 +35,13 @@ function AdminLoginModal({ isOpen, onClose }) {
         return;
       }
 
+      const data = await response.json();
+
+localStorage.setItem(
+  "token",
+  data.token
+);
+
       login();
 
       navigate("/admin");

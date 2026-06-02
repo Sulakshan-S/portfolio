@@ -23,8 +23,15 @@ function AdminDashboard() {
 
   const fetchMessages = async () => {
     try {
+      const token = localStorage.getItem("token");
+
       const response = await fetch(
-        "http://localhost:8080/api/messages"
+        "http://localhost:8080/api/messages",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
 
       if (!response.ok) {
@@ -50,10 +57,15 @@ function AdminDashboard() {
     if (!confirmed) return;
 
     try {
+      const token = localStorage.getItem("token");
+
       const response = await fetch(
         `http://localhost:8080/api/messages/${id}`,
         {
           method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
       );
 
@@ -85,10 +97,15 @@ function AdminDashboard() {
   const markAsRead = async (id) => {
     try {
 
+      const token = localStorage.getItem("token");
+
       await fetch(
         `http://localhost:8080/api/messages/${id}/read`,
         {
           method: "PUT",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
       );
 

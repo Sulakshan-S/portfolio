@@ -5,7 +5,11 @@ import com.example.portfolio.model.Admin;
 import com.example.portfolio.repository.AdminRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import com.example.portfolio.dto.LoginResponse;
+import com.example.portfolio.security.JwtUtil;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @RestController
 @RequestMapping("/api/admin")
@@ -13,7 +17,9 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "http://localhost:5173")
 public class AdminController {
 
+    private final JwtUtil jwtUtil;
     private final AdminRepository adminRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @PostMapping("/login")
     public ResponseEntity<?> login(
@@ -29,11 +35,23 @@ public class AdminController {
                     .body("Invalid Credentials");
         }
 
-        if (!admin.getPassword().equals(request.getPassword())) {
+        if (
+                !passwordEncoder.matches(
+                        request.getPassword(),
+                        admin.getPassword()
+                )
+        ) {
             return ResponseEntity.badRequest()
-                    .body("Invalid Credentials");
+                    .body("Invalid Credential");
         }
 
-        return ResponseEntity.ok("Login successful");
+        String token =
+                jwtUtil.generateToken(
+                        admin.getUsername()
+                );
+
+        return ResponseEntity.ok(
+                new LoginResponse(token)
+        );
     }
 }
