@@ -15,9 +15,4 @@ export const siteConfig = {
   resumePath: "/resume.pdf",
   academicStatus: "Undergraduate (2024 - Present)",
   university: "University of Kelaniya, Sri Lanka",
-  emailjs: {
-    serviceId: "service_n0d7wru", // Replace with your EmailJS service ID
-    templateId: "template_n6o0vng", // Replace with your EmailJS template ID
-    publicKey: "Uss3lUICeIBnGgoNd", // Replace with your EmailJS public key
-  },
 };
