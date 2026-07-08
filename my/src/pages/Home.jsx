@@ -1,11 +1,11 @@
-import Navbar from "../components/Navbar";
-import Hero from "../components/Hero";
-import About from "../components/About";
-import Skills from "../components/Skills";
-import TechStack from "../components/TechStack";
-import Projects from "../components/Projects";
-import Contact from "../components/Contact";
-import Footer from "../components/Footer";
+import Navbar from "../components/layout/Navbar";
+import Hero from "../components/sections/Hero";
+import About from "../components/sections/About";
+import Skills from "../components/sections/Skills";
+import TechStack from "../components/sections/TechStack";
+import Projects from "../components/sections/Projects";
+import Contact from "../components/sections/Contact";
+import Footer from "../components/layout/Footer";
 import { useState } from "react";
 import AdminLoginModal from "../components/admin/AdminLoginModal";
 
