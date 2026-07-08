@@ -70,7 +70,7 @@ function Hero() {
 
             <Button
               href={siteConfig.resumePath}
-              download
+              download="resume.pdf"
               variant="secondary"
               className="flex-1 sm:flex-initial"
             >

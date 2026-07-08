@@ -12,7 +12,7 @@ export const siteConfig = {
   email: "shanmuharasasulakshan@gmail.com",
   phone: "+94 77 224 5243",
   location: "Colombo, Sri Lanka",
-  resumePath: "./public/resume.pdf",
+  resumePath: "/resume.pdf",
   academicStatus: "Undergraduate (2024 - Present)",
   university: "University of Kelaniya, Sri Lanka",
 };
