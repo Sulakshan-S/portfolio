@@ -76,13 +76,6 @@ function Navbar({ onAdminClick }) {
           </ul>
 
           <div className="h-4 w-[1px] bg-slate-800" />
-
-          <button
-            onClick={onAdminClick}
-            className="text-xs font-bold uppercase tracking-wider text-brand-indigo py-2.5 px-4 rounded-xl border border-brand-indigo/25 hover:border-brand-indigo/50 hover:bg-brand-indigo/5 active:scale-95 transition-all duration-200 cursor-pointer shadow-md"
-          >
-            Admin
-          </button>
         </div>
 
         {/* Mobile Hamburger Button */}
